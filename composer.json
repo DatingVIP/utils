@@ -1,0 +1,24 @@
+{
+    "name": "datingvip/utils",
+    "type": "library",
+    "description": "Various utility classes",
+    "keywords": ["environment", "env"],
+    "homepage": "https://github.com/DatingVIP/utils",
+    "license": "LGPLv3",
+    "authors": [
+        {
+            "name": "Boris Momčilović",
+            "email": "boris@firstbeatmedia.com",
+            "homepage": "http://firstbeatmedia.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "DatingVIP": "src"
+        }
+    }
+}
