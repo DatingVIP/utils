@@ -20,7 +20,7 @@ class Env
  * @access protected
  * @static
  */
-	protected static $map = [];
+    protected static $map = [];
 
 /**
  * Default environment name
@@ -29,7 +29,7 @@ class Env
  * @access protected
  * @static
  */
-	protected static $default = 'production';
+    protected static $default = 'production';
 
 /**
  * List of environment names where we consider debug mode on
@@ -38,7 +38,7 @@ class Env
  * @access protected
  * @static
  */
-	protected static $debug = ['development'];
+    protected static $debug = ['development'];
 
 /**
  * Creating instances is disabled
@@ -48,7 +48,7 @@ class Env
  * @return void
  * @final
  */
-	final private function __construct ()	{}
+    final private function __construct() {}
 
 /**
  * Cloning is disabled
@@ -58,7 +58,7 @@ class Env
  * @return void
  * @final
  */
-	final private function __clone ()		{}
+    final private function __clone() {}
 
 /**
  * Setup a map of environments to their patterns and optionally debug environments
@@ -69,13 +69,13 @@ class Env
  * @return void
  * @static
  */
-	public static function setup (Array $map, Array $debug = [])
-	{
-		array_change_key_case ($map, CASE_LOWER);
-		static::$map = $map;
+    public static function setup(Array $map, Array $debug = [])
+    {
+        array_change_key_case ($map, CASE_LOWER);
+        static::$map = $map;
 
-		if (!empty ($debug))	{ static::$debug = $debug; }
-	}
+        if (!empty ($debug))	{ static::$debug = $debug; }
+    }
 
 /**
  * Get environment name for given host
@@ -86,23 +86,20 @@ class Env
  * @return string
  * @static
  */
-	public static function get ($host = '')
-	{
-		if (!is_scalar ($host) || empty ($host))
-		{
-			$host = isset ($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-		}
+    public static function get($host = '')
+    {
+        if (!is_scalar ($host) || empty ($host)) {
+            $host = isset ($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+        }
 
-		foreach (static::$map as $env => $patterns)
-		{
-			foreach ((array) $patterns as $pattern)
-			{
-				if (preg_match ($pattern, $host))		{ return $env; }
-			}
-		}
+        foreach (static::$map as $env => $patterns) {
+            foreach ((array) $patterns as $pattern) {
+                if (preg_match ($pattern, $host))		{ return $env; }
+            }
+        }
 
-		return static::$default;
-	}
+        return static::$default;
+    }
 
 /**
  * Check if current environment allows debug
@@ -112,10 +109,10 @@ class Env
  * @return bool
  * @static
  */
-	public static function debug ()
-	{
-		return in_array (static::get (), static::$debug);
-	}
+    public static function debug()
+    {
+        return in_array (static::get (), static::$debug);
+    }
 
 /**
  * Check if given environment is the same as for given host
@@ -126,10 +123,10 @@ class Env
  * @return bool
  * @static
  */
-	public static function is ($env, $host = '')
-	{
-		return static::get ($host) === strtolower ($env);
-	}
+    public static function is($env, $host = '')
+    {
+        return static::get ($host) === strtolower ($env);
+    }
 
 /**
  * Check if we're running via CLI
@@ -139,10 +136,10 @@ class Env
  * @return bool
  * @static
  */
-	public static function isCLI ()
-	{
-		return substr (PHP_SAPI, 0, 3) == 'cli' || (isset ($_SERVER['argc']) && isset ($_SERVER['argv']));
-	}
+    public static function isCLI()
+    {
+        return substr (PHP_SAPI, 0, 3) == 'cli' || (isset ($_SERVER['argc']) && isset ($_SERVER['argv']));
+    }
 
 /**
  * Check if we're running via web
@@ -152,10 +149,10 @@ class Env
  * @return bool
  * @static
  */
-	public static function isWeb ()
-	{
-		return !static::isCli ();
-	}
+    public static function isWeb()
+    {
+        return !static::isCli ();
+    }
 
 /**
  * Check if we're running over HTTPS
@@ -165,10 +162,10 @@ class Env
  * @return bool
  * @static
  */
-	public static function isHTTPS ()
-	{
-		return !empty ($_SERVER['HTTPS']) || (isset ($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443);
-	}
+    public static function isHTTPS()
+    {
+        return !empty ($_SERVER['HTTPS']) || (isset ($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443);
+    }
 
 /**
  * Magic static wrapper for "isEnvironmentName" checker methods
@@ -180,12 +177,11 @@ class Env
  * @static
  * @magic
  */
-	public static function __callStatic ($name, $args)
-	{
-		if (substr ($name, 0, 2) == 'is')
-		{
-			return static::is (strtolower (substr ($name, 2)), isset ($args[0]) ? $args[0] : '');
-		}
-	}
+    public static function __callStatic($name, $args)
+    {
+        if (substr ($name, 0, 2) == 'is') {
+            return static::is (strtolower (substr ($name, 2)), isset ($args[0]) ? $args[0] : '');
+        }
+    }
 
 }
