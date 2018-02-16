@@ -4,7 +4,7 @@
     "description": "Various utility classes",
     "keywords": ["environment", "env"],
     "homepage": "https://github.com/DatingVIP/utils",
-    "license": "LGPLv3",
+    "license": "LGPL-3.0-or-later",
     "authors": [
         {
             "name": "Boris Momčilović",
